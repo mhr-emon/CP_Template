@@ -1,0 +1,5 @@
+if n % x == 0 && x % m !=0 , x = ?
+divide n by divisors of m until n % m != 0
+  while(n % m == 0 ) {
+     n /= div(m);
+  }

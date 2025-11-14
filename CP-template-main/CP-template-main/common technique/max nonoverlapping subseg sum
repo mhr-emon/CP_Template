@@ -1,0 +1,20 @@
+bool cmsort(pair<ll,ll> a, pair<ll,ll> b) {
+    return a.S < b.S;   
+}
+ll maxSeg(vector<pair<ll,ll>> vc) { //max nonoverlapping subseg sum
+   sort(all(vc), cmsort);
+   vector<ll> v1;
+   for(auto u : vc) v1.pb(u.S);     
+   vector<ll> dp(vc.size());
+   for(ll i=0; i<vc.size(); i++) {
+      auto it = upper_bound(all(v1), vc[i].F - 1ll);
+      ll k = (it - v1.begin()) - 1;
+      ll nibo = (vc[i].S - vc[i].F) + 1;
+      if(k >= 0) nibo += dp[k];
+      ll nibona = 0;
+      if(i > 0) nibona = dp[i-1];
+      dp[i] = max(nibo, nibona);
+   }
+   return dp.back();
+}
+ 
